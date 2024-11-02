@@ -22,7 +22,7 @@ class GameSocket {
 
   private constructor() {
     // Utilisez l'URL de votre service Render
-    this.socket = io('https://votre-app.onrender.com');
+    this.socket = io('https://challengegeo.onrender.com');
   }
 
   public static getInstance(): GameSocket {

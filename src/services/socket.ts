@@ -21,8 +21,8 @@ class GameSocket {
   private static instance: GameSocket;
 
   private constructor() {
-    // Utilisez l'URL de votre service Render
-    this.socket = io('https://challengegeo.onrender.com');
+    const serverUrl = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+    this.socket = io(serverUrl);
   }
 
   public static getInstance(): GameSocket {

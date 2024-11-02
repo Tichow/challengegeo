@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import { Position, Player, GameRoom } from '../src/types/game';
+import { Position, Player, GameRoom } from './types.js';
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -75,13 +75,13 @@ io.on('connection', (socket) => {
   socket.on('submitGuess', (roomCode: string, playerId: string, guess: Position) => {
     const room = rooms.get(roomCode);
     if (room) {
-      const player = room.players.find(p => p.id === playerId);
+      const player = room.players.find((p: Player) => p.id === playerId);
       if (player) {
         player.guess = guess;
         io.to(roomCode).emit('playerGuess', playerId, guess);
 
         // Check if all players have guessed
-        if (room.players.every(p => p.guess)) {
+        if (room.players.every((p: Player) => p.guess)) {
           io.to(roomCode).emit('roundEnd');
         }
       }
